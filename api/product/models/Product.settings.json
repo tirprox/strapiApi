@@ -1,0 +1,45 @@
+{
+  "connection": "default",
+  "collectionName": "product",
+  "info": {
+    "name": "product",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "msid": {
+      "default": "",
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "description": {
+      "default": "",
+      "type": "text"
+    },
+    "article": {
+      "model": "article",
+      "via": "products"
+    },
+    "name": {
+      "default": "",
+      "unique": true,
+      "type": "string",
+      "required": true
+    },
+    "uniqueDescription": {
+      "default": false,
+      "type": "boolean"
+    },
+    "primaryPhoto": {
+      "default": "",
+      "type": "string"
+    },
+    "gallery": {
+      "default": "",
+      "type": "json"
+    }
+  }
+}

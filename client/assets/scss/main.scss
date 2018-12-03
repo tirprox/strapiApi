@@ -1,0 +1,8 @@
+$theme-colors: (
+  "primary": #42b883,
+  "secondary": #35495e
+ // "danger": #ff4136
+);
+
+//@import "bootstrap-variable-override";
+@import "~bootstrap/scss/bootstrap.scss";
