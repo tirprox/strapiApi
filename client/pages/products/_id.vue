@@ -5,7 +5,7 @@
         <div class="col-md-6 ">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-white p-0 pb-4 border-bottom">
-              <li class="breadcrumb-item" aria-current="page"><nuxt-link class="" to="/descriptions" tag="a">Список артикулов</nuxt-link></li>
+              <li class="breadcrumb-item" aria-current="page"><nuxt-link class="" to="/article-list" tag="a">Список артикулов</nuxt-link></li>
               <li class="breadcrumb-item" aria-current="page"><nuxt-link class="" :to="{ name: 'articles-id', params: { id: article._id}}" tag="a">{{article.name}}</nuxt-link></li>
               <li class="breadcrumb-item active" aria-current="page">{{product.name}}</li>
             </ol>

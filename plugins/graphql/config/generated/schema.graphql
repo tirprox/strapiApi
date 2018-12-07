@@ -56,12 +56,108 @@ input ArticleInput {
   products: [ID]
 }
 
+type Counterparty {
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  msid: String!
+  name: String
+  feedback: Feedback
+  phone: String
+  email: String
+}
+
+type CounterpartyAggregator {
+  count: Int
+}
+
+type CounterpartyConnection {
+  values: [Counterparty]
+  groupBy: CounterpartyGroupBy
+  aggregate: CounterpartyAggregator
+}
+
+type CounterpartyConnection_id {
+  key: ID
+  connection: CounterpartyConnection
+}
+
+type CounterpartyConnectionCreatedAt {
+  key: DateTime
+  connection: CounterpartyConnection
+}
+
+type CounterpartyConnectionEmail {
+  key: String
+  connection: CounterpartyConnection
+}
+
+type CounterpartyConnectionFeedback {
+  key: ID
+  connection: CounterpartyConnection
+}
+
+type CounterpartyConnectionMsid {
+  key: String
+  connection: CounterpartyConnection
+}
+
+type CounterpartyConnectionName {
+  key: String
+  connection: CounterpartyConnection
+}
+
+type CounterpartyConnectionPhone {
+  key: String
+  connection: CounterpartyConnection
+}
+
+type CounterpartyConnectionUpdatedAt {
+  key: DateTime
+  connection: CounterpartyConnection
+}
+
+type CounterpartyGroupBy {
+  _id: [CounterpartyConnection_id]
+  createdAt: [CounterpartyConnectionCreatedAt]
+  updatedAt: [CounterpartyConnectionUpdatedAt]
+  msid: [CounterpartyConnectionMsid]
+  name: [CounterpartyConnectionName]
+  feedback: [CounterpartyConnectionFeedback]
+  phone: [CounterpartyConnectionPhone]
+  email: [CounterpartyConnectionEmail]
+}
+
+input CounterpartyInput {
+  msid: String!
+  name: String
+  feedback: ID
+  phone: String
+  email: String
+}
+
 input createArticleInput {
   data: ArticleInput
 }
 
 type createArticlePayload {
   article: Article
+}
+
+input createCounterpartyInput {
+  data: CounterpartyInput
+}
+
+type createCounterpartyPayload {
+  counterparty: Counterparty
+}
+
+input createFeedbackInput {
+  data: FeedbackInput
+}
+
+type createFeedbackPayload {
+  feedback: Feedback
 }
 
 input createProductInput {
@@ -101,6 +197,22 @@ type deleteArticlePayload {
   article: Article
 }
 
+input deleteCounterpartyInput {
+  where: InputID
+}
+
+type deleteCounterpartyPayload {
+  counterparty: Counterparty
+}
+
+input deleteFeedbackInput {
+  where: InputID
+}
+
+type deleteFeedbackPayload {
+  feedback: Feedback
+}
+
 input deleteProductInput {
   where: InputID
 }
@@ -125,6 +237,94 @@ type deleteUserPayload {
   user: UsersPermissionsUser
 }
 
+type Feedback {
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  counterparty: Counterparty
+  content: String
+  feedbackDate: DateTime
+  response: String
+  responseDate: DateTime
+  employee: UsersPermissionsUser
+}
+
+type FeedbackAggregator {
+  count: Int
+}
+
+type FeedbackConnection {
+  values: [Feedback]
+  groupBy: FeedbackGroupBy
+  aggregate: FeedbackAggregator
+}
+
+type FeedbackConnection_id {
+  key: ID
+  connection: FeedbackConnection
+}
+
+type FeedbackConnectionContent {
+  key: String
+  connection: FeedbackConnection
+}
+
+type FeedbackConnectionCounterparty {
+  key: ID
+  connection: FeedbackConnection
+}
+
+type FeedbackConnectionCreatedAt {
+  key: DateTime
+  connection: FeedbackConnection
+}
+
+type FeedbackConnectionEmployee {
+  key: ID
+  connection: FeedbackConnection
+}
+
+type FeedbackConnectionFeedbackDate {
+  key: DateTime
+  connection: FeedbackConnection
+}
+
+type FeedbackConnectionResponse {
+  key: String
+  connection: FeedbackConnection
+}
+
+type FeedbackConnectionResponseDate {
+  key: DateTime
+  connection: FeedbackConnection
+}
+
+type FeedbackConnectionUpdatedAt {
+  key: DateTime
+  connection: FeedbackConnection
+}
+
+type FeedbackGroupBy {
+  _id: [FeedbackConnection_id]
+  createdAt: [FeedbackConnectionCreatedAt]
+  updatedAt: [FeedbackConnectionUpdatedAt]
+  counterparty: [FeedbackConnectionCounterparty]
+  content: [FeedbackConnectionContent]
+  feedbackDate: [FeedbackConnectionFeedbackDate]
+  response: [FeedbackConnectionResponse]
+  responseDate: [FeedbackConnectionResponseDate]
+  employee: [FeedbackConnectionEmployee]
+}
+
+input FeedbackInput {
+  counterparty: ID
+  content: String
+  feedbackDate: DateTime
+  response: String
+  responseDate: DateTime
+  employee: ID
+}
+
 input FileInput {
   name: String!
   hash: String!
@@ -146,12 +346,18 @@ The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://
 """
 scalar JSON
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Article | createArticlePayload | updateArticlePayload | deleteArticlePayload | ArticleConnection | ArticleAggregator | ArticleGroupBy | ArticleConnection_id | ArticleConnectionCreatedAt | ArticleConnectionUpdatedAt | ArticleConnectionDescription | ArticleConnectionName | Product | createProductPayload | updateProductPayload | deleteProductPayload | ProductConnection | ProductAggregator | ProductGroupBy | ProductConnection_id | ProductConnectionCreatedAt | ProductConnectionUpdatedAt | ProductConnectionMsid | ProductConnectionDescription | ProductConnectionArticle | ProductConnectionName | ProductConnectionUniqueDescription | ProductConnectionPrimaryPhoto | ProductConnectionGallery | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Article | createArticlePayload | updateArticlePayload | deleteArticlePayload | ArticleConnection | ArticleAggregator | ArticleGroupBy | ArticleConnection_id | ArticleConnectionCreatedAt | ArticleConnectionUpdatedAt | ArticleConnectionDescription | ArticleConnectionName | Counterparty | createCounterpartyPayload | updateCounterpartyPayload | deleteCounterpartyPayload | CounterpartyConnection | CounterpartyAggregator | CounterpartyGroupBy | CounterpartyConnection_id | CounterpartyConnectionCreatedAt | CounterpartyConnectionUpdatedAt | CounterpartyConnectionMsid | CounterpartyConnectionName | CounterpartyConnectionFeedback | CounterpartyConnectionPhone | CounterpartyConnectionEmail | Feedback | createFeedbackPayload | updateFeedbackPayload | deleteFeedbackPayload | FeedbackConnection | FeedbackAggregator | FeedbackGroupBy | FeedbackConnection_id | FeedbackConnectionCreatedAt | FeedbackConnectionUpdatedAt | FeedbackConnectionCounterparty | FeedbackConnectionContent | FeedbackConnectionFeedbackDate | FeedbackConnectionResponse | FeedbackConnectionResponseDate | FeedbackConnectionEmployee | Product | createProductPayload | updateProductPayload | deleteProductPayload | ProductConnection | ProductAggregator | ProductGroupBy | ProductConnection_id | ProductConnectionCreatedAt | ProductConnectionUpdatedAt | ProductConnectionMsid | ProductConnectionDescription | ProductConnectionArticle | ProductConnectionName | ProductConnectionUniqueDescription | ProductConnectionPrimaryPhoto | ProductConnectionGallery | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
 
 type Mutation {
   createArticle(input: createArticleInput): createArticlePayload
   updateArticle(input: updateArticleInput): updateArticlePayload
   deleteArticle(input: deleteArticleInput): deleteArticlePayload
+  createCounterparty(input: createCounterpartyInput): createCounterpartyPayload
+  updateCounterparty(input: updateCounterpartyInput): updateCounterpartyPayload
+  deleteCounterparty(input: deleteCounterpartyInput): deleteCounterpartyPayload
+  createFeedback(input: createFeedbackInput): createFeedbackPayload
+  updateFeedback(input: updateFeedbackInput): updateFeedbackPayload
+  deleteFeedback(input: deleteFeedbackInput): deleteFeedbackPayload
   createProduct(input: createProductInput): createProductPayload
   updateProduct(input: updateProductInput): updateProductPayload
   deleteProduct(input: deleteProductInput): deleteProductPayload
@@ -270,6 +476,12 @@ type Query {
   article(id: ID!): Article
   articles(sort: String, limit: Int, start: Int, where: JSON): [Article]
   articlesConnection(sort: String, limit: Int, start: Int, where: JSON): ArticleConnection
+  counterparty(id: ID!): Counterparty
+  counterparties(sort: String, limit: Int, start: Int, where: JSON): [Counterparty]
+  counterpartiesConnection(sort: String, limit: Int, start: Int, where: JSON): CounterpartyConnection
+  feedback(id: ID!): Feedback
+  feedbacks(sort: String, limit: Int, start: Int, where: JSON): [Feedback]
+  feedbacksConnection(sort: String, limit: Int, start: Int, where: JSON): FeedbackConnection
   product(id: ID!): Product
   products(sort: String, limit: Int, start: Int, where: JSON): [Product]
   productsConnection(sort: String, limit: Int, start: Int, where: JSON): ProductConnection
@@ -303,6 +515,24 @@ input updateArticleInput {
 
 type updateArticlePayload {
   article: Article
+}
+
+input updateCounterpartyInput {
+  where: InputID
+  data: CounterpartyInput
+}
+
+type updateCounterpartyPayload {
+  counterparty: Counterparty
+}
+
+input updateFeedbackInput {
+  where: InputID
+  data: FeedbackInput
+}
+
+type updateFeedbackPayload {
+  feedback: Feedback
 }
 
 input updateProductInput {
@@ -439,6 +669,7 @@ input UserInput {
   confirmed: Boolean
   blocked: Boolean
   role: ID
+  responses: [ID]
 }
 
 type UsersPermissionsMe {
@@ -521,6 +752,7 @@ type UsersPermissionsUser {
   confirmed: Boolean
   blocked: Boolean
   role: UsersPermissionsRole
+  responses(sort: String, limit: Int, start: Int, where: JSON): [Feedback]
 }
 
 type UsersPermissionsUserAggregator {

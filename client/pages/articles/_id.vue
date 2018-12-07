@@ -5,7 +5,7 @@
       <div class="col-md-6 ">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-white p-0 m-0">
-            <li class="breadcrumb-item" aria-current="page"><nuxt-link class="" to="/descriptions" tag="a">Список артикулов</nuxt-link></li>
+            <li class="breadcrumb-item" aria-current="page"><nuxt-link class="" to="/article-list" tag="a">Список артикулов</nuxt-link></li>
             <li class="breadcrumb-item active" aria-current="page">{{ name }}</li>
           </ol>
         </nav>
@@ -25,7 +25,7 @@
 
       <div class="col-md-6">
         <button class="btn btn-primary mb-3" @click="update()">Обновить</button>
-        <nuxt-link class="btn btn-secondary mb-3" to="/descriptions" tag="a">Назад</nuxt-link>
+        <nuxt-link class="btn btn-secondary mb-3" to="/article-list" tag="a">Назад</nuxt-link>
         <b-alert variant="success"
                  fade
                  dismissible
