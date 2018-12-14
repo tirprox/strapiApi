@@ -53,7 +53,7 @@
       const response = await strapi.request('post', '/graphql', {
         data: {
           query: `query {
-            counterparties {
+            counterparties (limit: 500) {
               _id
               msid
               name

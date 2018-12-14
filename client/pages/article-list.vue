@@ -76,7 +76,7 @@
       const response = await strapi.request('post', '/graphql', {
         data: {
           query: `query {
-            articles {
+            articles (limit: 500) {
             _id
               name
               description

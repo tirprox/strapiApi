@@ -110,7 +110,7 @@
             article(id: "${context.params.id}") {
               name
               description
-              products {
+              products (limit: 500) {
               _id
                msid
                name
